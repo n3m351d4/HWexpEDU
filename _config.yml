@@ -1,0 +1,11 @@
+---
+title: "Hardware Backdoors Wiki"
+description: "Полная техническая wiki по аппаратным и микропрограммным бэкдорам вне BIOS/UEFI"
+baseurl: ""
+url: ""
+author: "Security Researcher"
+email: "your-email@example.com"
+
+# Dark theme settings
+dark_mode: true
+color_scheme: dark
