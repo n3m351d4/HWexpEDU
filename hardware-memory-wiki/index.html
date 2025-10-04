@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hardware Memory & Microcontrollers Wiki</title>
+    <link rel="stylesheet" href="assets/css/dark-theme.css">
+    <style>
+        /* Дополнительные стили для главной страницы */
+        .hero-section {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23333" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #4fc3f7;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(79, 195, 247, 0.3);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: #e0e0e0;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #4fc3f7, #81d4fa);
+            color: #1a1a1a;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(79, 195, 247, 0.3);
+        }
+        
+        .hero-badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(79, 195, 247, 0.4);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+            padding: 0 20px;
+        }
+        
+        .feature-card {
+            background: linear-gradient(145deg, #2a2a2a, #1f1f1f);
+            border: 1px solid #333;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(79, 195, 247, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .feature-card:hover::before {
+            left: 100%;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: #4fc3f7;
+            box-shadow: 0 10px 30px rgba(79, 195, 247, 0.2);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .feature-title {
+            font-size: 1.3rem;
+            color: #4fc3f7;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .feature-description {
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+        
+        .sections-preview {
+            background: #1a1a1a;
+            padding: 60px 0;
+        }
+        
+        .sections-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .sections-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #4fc3f7;
+            margin-bottom: 50px;
+        }
+        
+        .sections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .section-card {
+            background: linear-gradient(145deg, #2a2a2a, #1f1f1f);
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #4fc3f7, #81d4fa);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .section-card:hover::after {
+            transform: scaleX(1);
+        }
+        
+        .section-card:hover {
+            transform: translateY(-3px);
+            border-color: #4fc3f7;
+            box-shadow: 0 8px 25px rgba(79, 195, 247, 0.15);
+        }
+        
+        .section-card h3 {
+            color: #4fc3f7;
+            margin: 0 0 15px 0;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-card p {
+            color: #e0e0e0;
+            margin: 0 0 20px 0;
+            line-height: 1.5;
+            font-size: 0.95rem;
+        }
+        
+        .section-link {
+            display: inline-block;
+            background: linear-gradient(45deg, #4fc3f7, #81d4fa);
+            color: #1a1a1a !important;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .section-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(79, 195, 247, 0.3);
+        }
+        
+        .disclaimer-section {
+            background: linear-gradient(135deg, #2a2a2a, #1f1f1f);
+            padding: 40px 0;
+            margin-top: 60px;
+        }
+        
+        .disclaimer-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+        
+        .disclaimer-title {
+            color: #ff9800;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .disclaimer-text {
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .sections-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">🔬 Hardware Memory & Microcontrollers Wiki</h1>
+            <p class="hero-subtitle">
+                Образовательная wiki по памяти и микроконтроллерам материнских плат
+            </p>
+            <a href="#sections" class="hero-badge">Изучить материалы →</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-grid">
+        <div class="feature-card">
+            <span class="feature-icon">🎓</span>
+            <h3 class="feature-title">Образование</h3>
+            <p class="feature-description">
+                Понимание архитектуры аппаратного обеспечения за пределами BIOS
+            </p>
+        </div>
+        
+        <div class="feature-card">
+            <span class="feature-icon">🔬</span>
+            <h3 class="feature-title">Исследование</h3>
+            <p class="feature-description">
+                Изучение альтернативных возможностей периферийных устройств
+            </p>
+        </div>
+        
+        <div class="feature-card">
+            <span class="feature-icon">🛡️</span>
+            <h3 class="feature-title">Безопасность</h3>
+            <p class="feature-description">
+                Анализ новых векторов атак на аппаратном уровне
+            </p>
+        </div>
+    </section>
+
+    <!-- Sections Preview -->
+    <section class="sections-preview" id="sections">
+        <div class="sections-container">
+            <h2 class="sections-title">📚 Основные разделы</h2>
+            <div class="sections-grid">
+                <div class="section-card">
+                    <h3>🔍 Введение и модель угроз</h3>
+                    <p>Теоретические основы анализа аппаратных угроз за пределами BIOS. Фокус на памяти материнской платы, микроконтроллерах и альтернативных интерфейсах.</p>
+                    <a href="docs/wiki-beyond-bios/01-intro-threat-model.html" class="section-link">Изучить →</a>
+                </div>
+                
+                <div class="section-card">
+                    <h3>🏗️ Архитектура платформы</h3>
+                    <p>Обзор архитектуры материнских плат. Изучение микроконтроллеров управления, дополнительной памяти, периферийных чипов и их интерфейсов программирования.</p>
+                    <a href="docs/wiki-beyond-bios/02-architecture-zoo.html" class="section-link">Изучить →</a>
+                </div>
+                
+                <div class="section-card">
+                    <h3>🔧 Микроконтроллеры платформы</h3>
+                    <p>Анализ микроконтроллеров на материнской плате. Изучение их собственной памяти, интерфейсов программирования и возможностей модификации прошивок.</p>
+                    <a href="docs/wiki-beyond-bios/03-platform-mcus.html" class="section-link">Изучить →</a>
+                </div>
+                
+                <div class="section-card">
+                    <h3>🖥️ Периферия с обновляемыми прошивками</h3>
+                    <p>Исследование периферийных устройств с собственной памятью. USB-контроллеры, сетевые адаптеры, аудио-видео компоненты с возможностью записи прошивок.</p>
+                    <a href="docs/wiki-beyond-bios/04-peripherals-fw.html" class="section-link">Изучить →</a>
+                </div>
+                
+                <div class="section-card">
+                    <h3>💾 Типы энергонезависимой памяти</h3>
+                    <p>Изучение дополнительной памяти на материнской плате и в периферийных устройствах. Flash, EEPROM, NVRAM вне BIOS и их роль в хранении конфигураций.</p>
+                    <a href="docs/wiki-beyond-bios/05-nonvolatile-memory.html" class="section-link">Изучить →</a>
+                </div>
+                
+                <div class="section-card">
+                    <h3>🔗 Пути записи из ОС</h3>
+                    <p>Анализ способов взаимодействия операционной системы с аппаратным обеспечением. Драйверы, системные вызовы и интерфейсы доступа.</p>
+                    <a href="docs/wiki-beyond-bios/06-os-write-paths.html" class="section-link">Изучить →</a>
+                </div>
+                
+                <div class="section-card">
+                    <h3>🛠️ Инструменты и команды</h3>
+                    <p>Обзор программных инструментов для анализа аппаратного обеспечения. Утилиты диагностики, мониторинга и исследования прошивок.</p>
+                    <a href="docs/wiki-beyond-bios/07-tools-and-commands.html" class="section-link">Изучить →</a>
+                </div>
+                
+                <div class="section-card">
+                    <h3>🔬 Практические кейсы</h3>
+                    <p>Детальные примеры анализа различных типов устройств. USB-контроллеры, сетевые адаптеры, аудио-видео компоненты и другие.</p>
+                    <a href="docs/wiki-beyond-bios/09-case-studies/" class="section-link">Изучить →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Disclaimer Section -->
+    <section class="disclaimer-section">
+        <div class="disclaimer-content">
+            <h2 class="disclaimer-title">⚠️ ВАЖНЫЙ ДИСКЛЕЙМЕР</h2>
+            <p class="disclaimer-text">
+                <strong>ДАННЫЙ ПРОЕКТ ЯВЛЯЕТСЯ ОБРАЗОВАТЕЛЬНЫМ МАТЕРИАЛОМ!</strong><br>
+                Материал предназначен для изучения архитектуры материнских плат. 
+                Используйте только на собственных системах и в соответствии с законодательством.
+            </p>
+        </div>
+    </section>
+
+    <script>
+        // Плавная прокрутка к разделам
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Анимация появления карточек при прокрутке
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Применяем анимацию к карточкам
+        document.querySelectorAll('.feature-card, .section-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
