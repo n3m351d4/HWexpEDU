@@ -1,3 +1,43 @@
+<style>
+body {
+    background-color: #1a1a1a !important;
+    color: #e0e0e0 !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.markdown-body {
+    background-color: #1a1a1a !important;
+    color: #e0e0e0 !important;
+}
+h1, h2, h3, h4, h5, h6 {
+    color: #4fc3f7 !important;
+}
+a {
+    color: #81d4fa !important;
+}
+a:hover {
+    color: #4fc3f7 !important;
+}
+blockquote {
+    background-color: #2a2a2a !important;
+    border-left: 4px solid #4fc3f7 !important;
+    color: #e0e0e0 !important;
+}
+code {
+    background-color: #2a2a2a !important;
+    color: #81d4fa !important;
+}
+pre {
+    background-color: #2a2a2a !important;
+    color: #e0e0e0 !important;
+}
+hr {
+    border-color: #333 !important;
+}
+strong {
+    color: #4fc3f7 !important;
+}
+</style>
+
 # 🔬 Hardware Memory & Microcontrollers Wiki
 
 > **Образовательная wiki по скрытой памяти и микроконтроллерам материнских плат**
