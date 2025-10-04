@@ -2,11 +2,9 @@
 
 > **Образовательная wiki по скрытой памяти и микроконтроллерам материнских плат**
 
-[![Deploy to GitHub Pages](https://github.com/n3m351d4/HWexpEDU/actions/workflows/jekyll.yml/badge.svg)](https://github.com/n3m351d4/HWexpEDU/actions/workflows/jekyll.yml)
+## 🌐 Репозиторий
 
-## 🌐 Онлайн версия
-
-**Сайт доступен по адресу:** https://n3m351d4.github.io/HWexpEDU/
+**Проект доступен на GitHub:** https://github.com/n3m351d4/HWexpEDU
 
 ---
 
